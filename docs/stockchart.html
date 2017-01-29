@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <div class="col-md-6">
+      <div id="chartArea" style="width:100%; height:400px;"></div>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Data</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  No Of Beneficiaries
+                </th>
+                <th>
+                  Loan Amount
+                </tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  40
+                </td>
+                <td>
+                  10000
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  30
+                </td>
+                <td>
+                  30000
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  10
+                </td>
+                <td>
+                  100000
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  11
+                </td>
+                <td>
+                  300000
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+
+        </div>
+      </div>
+    </div>
+
+    <div id="stockChart" style="height: 400px; min-width: 310px"></div>
+
+
+    <script type="text/javascript">
+    var response =
+    [{
+      no_of_beneficiaries: 40, loan_amount:10000
+    },{
+      no_of_beneficiaries: 30, loan_amount:30000
+    },{
+      no_of_beneficiaries: 10, loan_amount:100000
+    },{
+      no_of_beneficiaries: 11, loan_amount: 300000
+    }]
+
+    let ben_num = [];
+    let loan_amount = [];
+    for (var i = 0; i < response.length; i++) {
+      ben_num.push(response[i].no_of_beneficiaries);
+      loan_amount.push(response[i].loan_amount);
+    }
+    ben_num.sort(function(a, b) {
+      return a - b;
+    });
+    loan_amount.sort(function(a, b) {
+      return a - b;
+    });
+    $(function(){
+      var myChart = Highcharts.chart('chartArea', {
+        chart: {
+          type: 'spline'
+        },
+        title : {
+          text: 'P1 Graph'
+        },
+        xAxis: {
+          title: {
+            text: 'Loan Amount'
+          },
+          categories: loan_amount
+        },
+        yAxis: {
+          title: {
+            text: 'No of Beneficiaries'
+          }
+        },
+        series: [{
+          type: 'column',
+          name: 'Beneficiaries',
+          data: ben_num
+        }]
+      });
+
+    });
+
+    let data =[
+    [1264982400000,27.82],
+    [1265068800000,27.98],
+    [1265155200000,28.46],
+    [1265241600000,27.4],
+    [1265328000000,27.92],
+    [1265587200000,27.73],
+    [1265673600000,28.03],
+    [1265760000000,27.87],
+    [1265846400000,28.38],
+    [1265932800000,28.63],
+    [1266278400000,29.06],
+    [1266364800000,28.94],
+    [1266451200000,28.99],
+    [1266537600000,28.81],
+    [1266796800000,28.63],
+    [1266883200000,28.15],
+    [1266969600000,28.66],
+    [1267056000000,28.86],
+    [1267142400000,29.23],
+    [1267401600000,29.86],
+    [1267488000000,29.84],
+    [1267574400000,29.90],
+    [1267660800000,30.10],
+    [1267747200000,31.28],
+    [1268006400000,31.30],
+    [1268092800000,31.86],
+    [1268179200000,32.12],
+    [1268265600000,32.21],
+    [1268352000000,32.37],
+    [1268611200000,31.98],
+    [1268697600000,32.06],
+    [1268784000000,32.02],
+    [1268870400000,32.09],
+    [1268956800000,31.75],
+    [1269216000000,32.11],
+    [1269302400000,32.62],
+    [1269388800000,32.77],
+    [1269475200000,32.38],
+    [1269561600000,32.99],
+    [1269820800000,33.20],
+    [1269907200000,33.69],
+    [1269993600000,33.57]
+    ]
+      $(function () {
+
+            // Create the chart
+            Highcharts.stockChart('stockChart', {
+
+
+                rangeSelector: {
+                    selected: 1
+                },
+
+                title: {
+                    text: 'AAPL Stock Price'
+                },
+
+                series: [{
+                    name: 'AAPL',
+                    data: data,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+
+    });
+
+
+      </script>
+
+  </body>
+</html>

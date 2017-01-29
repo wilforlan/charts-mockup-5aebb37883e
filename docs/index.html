@@ -73,8 +73,20 @@
     </div>
     <br>
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div id="stockChart" style="width:100%; height:400px;">
+
+      </div>
+    </div>
+
+  </div>
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/highcharts/highcharts.js"></script>
+  <!-- <script src="bower_components/highcharts/highcharts.js"></script> -->
+  <!-- <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script> -->
   <script type="text/javascript">
 
   var response =
@@ -109,6 +121,9 @@
         text: 'P1 Graph'
       },
       xAxis: {
+        title: {
+          text: 'Loan Amount'
+        },
         categories: loan_amount
       },
       yAxis: {
@@ -118,11 +133,106 @@
       },
       series: [{
         type: 'column',
-        name: 'Loan Amount',
+        name: 'Beneficiaries',
         data: ben_num
       }]
     });
+
   });
-  </script>
+
+
+  let data =[
+  [1264982400000,17, 1233-12],
+  [1265068800000,22, 1233-12],
+  [1265155200000,21,1233-12],
+  [1265241600000,12,1233-12],
+  [1265328000000,13,1233-12],
+  [1265587200000,7,1233-12],
+  [1265673600000,20,1233-12],
+  [1265760000000,22,1233-12],
+  [1265846400000,29,1233-12],
+  [1265932800000,28,1233-12],
+  [1266278400000,26,1233-12],
+  [1266364800000,22,1233-12],
+  [1266451200000,23,1233-12],
+  [1266537600000,21,1233-12],
+  [1266796800000,2,1233-12],
+  [1266883200000,17],
+  [1266969600000,15],
+  [1267056000000,16],
+  [1267142400000,12],
+  [1267401600000,11],
+  [1267488000000,45],
+  [1267574400000,12],
+  [1267660800000,23],
+  [1267747200000,12],
+  [1268006400000,56],
+  [1268092800000,3],
+  [1268179200000,37],
+  [1268265600000,17],
+  [1268352000000,15],
+  [1268611200000,4],
+  [1268697600000,8],
+  [1268784000000,12],
+  [1268870400000,40],
+  [1268956800000,12],
+  [1269216000000,20],
+  [1269302400000,39],
+  [1269388800000,31],
+  [1269475200000,30],
+  [1269561600000,20],
+  [1269820800000,15],
+  [1269907200000,5],
+  [1269993600000,10]
+  ]
+    $(function () {
+
+          // Create the chart
+          Highcharts.stockChart('stockChart', {
+              chart: {
+                description: "Chart showing Total Numbers of Registered Beneficiaries in relationship to date Onboarded",
+                events: {
+                  click: function (event) {
+                      console.log(event.point);
+                  }
+                }
+              },
+
+              rangeSelector: {
+                  selected: 1
+              },
+
+              title: {
+                  text: 'P2 Chart: Chart showing Total Numbers of Registered Beneficiaries in relationship to date Onboarded'
+              },
+
+              plotOptions: {
+              series: {
+                cursor: 'pointer',
+                point: {events:
+                  {click: function()
+                    {
+                      console.log(this);
+                    }
+                  }
+                }
+               }
+             },
+              series: [{
+                  name: 'Number Beneficiaries Onboarded',
+                  data: data,
+                  tooltip: {
+                      valueDecimals: 0
+                  }
+              }]
+          });
+
+  });
+
+
+    </script>
+
+
+
 </body>
 </html>
