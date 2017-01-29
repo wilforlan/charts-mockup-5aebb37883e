@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>High Charts JS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+  <h2>Amplified Charts</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div id="chartArea" style="width:100%; height:400px;"></div>
+    </div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/highcharts/highcharts.js"></script>
+  <script type="text/javascript">
+
+  var response =
+  [{
+    no_of_beneficiaries: 40, loan_amount:10000
+  },{
+    no_of_beneficiaries: 30, loan_amount:30000
+  },{
+    no_of_beneficiaries: 10, loan_amount:100000
+  },{
+    no_of_beneficiaries: 11, loan_amount:11000
+  }]
+
+  let ben_num = [];
+  let loan_amount = [];
+  for (var i = 0; i < response.length; i++) {
+    ben_num.push(response[i].no_of_beneficiaries);
+    loan_amount.push(response[i].loan_amount);
+  }
+  ben_num.sort(function(a, b) {
+    return a - b;
+  });
+  loan_amount.sort(function(a, b) {
+    return a - b;
+  });
+  $(function(){
+    var myChart = Highcharts.chart('chartArea', {
+      chart: {
+        type: 'spline'
+      },
+      title : {
+        text: 'P1 Graph'
+      },
+      xAxis: {
+        categories: loan_amount
+      },
+      yAxis: {
+        title: {
+          text: 'No of Beneficiaries'
+        }
+      },
+      series: [{
+        type: 'column',
+        name: 'Loan Amount',
+        data: ben_num
+      }]
+    });
+  });
+  </script>
+</body>
+</html>
